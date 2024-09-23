@@ -98,7 +98,6 @@ impl<'d> SpiContext<'d> {
         } else {
             self.dc.set_high()?;
         }
-        self.dc.set_low()?;
         self.cs.set_low()?;
         self.write_byte(data)?;
         self.cs.set_high()?;
