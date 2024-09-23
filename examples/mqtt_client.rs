@@ -15,9 +15,11 @@ use log::*;
 const SSID: &str = env!("WIFI_SSID");
 const PASSWORD: &str = env!("WIFI_PASS");
 
-const MQTT_URL: &str = "mqtt://broker.emqx.io:1883";
+const MQTT_URL: &str = "mqtt://mqtt.yeechart.com:1883";
 const MQTT_CLIENT_ID: &str = "esp-mqtt-demo";
 const MQTT_TOPIC: &str = "esp-mqtt-demo";
+const MQTT_USER: &str = env!("MQTT_USER");
+const MQTT_PWD: &str = env!("MQTT_PWD");
 
 fn main() {
     esp_idf_svc::sys::link_patches();
@@ -100,6 +102,8 @@ fn mqtt_create(
         url,
         &MqttClientConfiguration {
             client_id: Some(client_id),
+            username: Some(MQTT_USER.into()),
+            password: Some(MQTT_PWD.into()),
             ..Default::default()
         },
     )?;
